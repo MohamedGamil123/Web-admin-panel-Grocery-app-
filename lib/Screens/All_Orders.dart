@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_admin_panel/Constants/Utils.dart';
 import 'package:grocery_admin_panel/Controllers/MenuController.dart';
@@ -27,7 +28,7 @@ class _All_Orders_ScreenState extends State<All_Orders_Screen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (Responsive.isDesktop(context))
-            Expanded(
+            const Expanded(
               child: Sidemenu(),
             ),
           Expanded(
@@ -41,17 +42,39 @@ class _All_Orders_ScreenState extends State<All_Orders_Screen> {
                     fct: () {
                       context.read<MenuController>().controlOrderMenu();
                     },
-                    text: "All orders", showtextfeild: true,
+                    text: "All orders",
+                    showtextfeild: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 20,
-                    itemBuilder: (BuildContext context, int index) {
-                      return const All_Orders_Widget();
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("users")
+                        .snapshots(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 20,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            const Center(
+                                child: CircularProgressIndicator(
+                              color: Colors.orange,
+                            ));
+                          }
+                          return ListView.builder(
+                            itemCount:  4,
+                            itemBuilder: (BuildContext context, int index) {
+                              return All_Orders_Widget(
+                               
+                              );
+                            },
+                          );
+                        },
+                      );
                     },
                   ),
                 ]),

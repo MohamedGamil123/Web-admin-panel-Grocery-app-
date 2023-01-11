@@ -5,7 +5,8 @@ class DrawerListTile extends StatelessWidget {
   String title;
   Function press;
   IconData icon;
-  DrawerListTile({required this.title, required this.press,required this.icon});
+  DrawerListTile(
+      {required this.title, required this.press, required this.icon});
 
   @override
   Widget build(BuildContext context) {

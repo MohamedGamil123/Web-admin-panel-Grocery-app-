@@ -78,7 +78,7 @@ class DashBoardScreen extends StatelessWidget {
                             desktop: Custom_gridview_product(isMain: true),
                             mobile: Custom_gridview_product(isMain: true),
                           ),
-                          Divider(
+                          const Divider(
                             height: 50,
                             thickness: 2,
                           ),

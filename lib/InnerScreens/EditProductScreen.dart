@@ -118,8 +118,8 @@ class _AddProductScreenState extends State<EditProductScreen> {
 
   Future pick_web_mobile_ImageURL() async {
     if (!kIsWeb) {
-      ImagePicker _picker = ImagePicker();
-      XFile? pickeimage = await _picker.pickImage(
+      ImagePicker picker = ImagePicker();
+      XFile? pickeimage = await picker.pickImage(
         source: ImageSource.gallery,
       );
       if (pickeimage != null) {
@@ -131,8 +131,8 @@ class _AddProductScreenState extends State<EditProductScreen> {
         print("No image has been picked");
       }
     } else if (kIsWeb) {
-      ImagePicker _picker = ImagePicker();
-      XFile? pickeimage = await _picker.pickImage(
+      ImagePicker picker = ImagePicker();
+      XFile? pickeimage = await picker.pickImage(
         source: ImageSource.gallery,
       );
       if (pickeimage != null) {
@@ -172,25 +172,25 @@ class _AddProductScreenState extends State<EditProductScreen> {
         setState(() {
           isLoading = true;
         });
-        if(pickimgfileMOb !=null){
-          ref =
-            FirebaseStorage.instance.ref("product images").child(widget.id + "jpg");
+        if (pickimgfileMOb != null) {
+          ref = FirebaseStorage.instance
+              .ref("product images")
+              .child("${widget.id}jpg");
 
-        kIsWeb
-            ? await ref?.putData(Uint8List.fromList(webImagePicked))
-            : await ref?.putFile(pickimgfileMOb!);
-        imageURL = await ref!.getDownloadURL();
+          kIsWeb
+              ? await ref?.putData(Uint8List.fromList(webImagePicked))
+              : await ref?.putFile(pickimgfileMOb!);
+          imageURL = await ref!.getDownloadURL();
           print(imageURL);
-        setState(() {
-          webimageURL = imageURL;
-        });
+          setState(() {
+            webimageURL = imageURL;
+          });
         }
-      
+
         await FirebaseFirestore.instance
             .collection("products")
             .doc(widget.id)
             .update({
-          
           "title": pro_titleController.text,
           "description": pro_desc_controller.text,
           "price": price_Controller.text,
@@ -280,7 +280,7 @@ class _AddProductScreenState extends State<EditProductScreen> {
                       showtextfeild: false,
                     ),
                     Container(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
@@ -473,36 +473,36 @@ class _AddProductScreenState extends State<EditProductScreen> {
                                                   });
                                                   print(selecteditem);
                                                 },
-                                                items: [
+                                                 items: [
                                                   DropdownMenuItem(
-                                                    value: "Vegetables",
+                                                    value: "الخضروات",
                                                     child: CustomText(
-                                                        text: "Vegetables"),
+                                                        text: "الخضروات"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Fruits",
+                                                    value: "الفواكة",
                                                     child: CustomText(
-                                                        text: "Fruits"),
+                                                        text: "الفواكة"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Grains",
+                                                    value: "البقوليات",
                                                     child: CustomText(
-                                                        text: "Grains"),
+                                                        text: "البقوليات"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Nuts",
+                                                    value: "المكسرات",
                                                     child: CustomText(
-                                                        text: "Nuts"),
+                                                        text: "المكسرات"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Herbs",
+                                                    value: "الأعشاب",
                                                     child: CustomText(
-                                                        text: "Herbs"),
+                                                        text: "الأعشاب"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Spices",
+                                                    value: "البهارات والتوابل",
                                                     child: CustomText(
-                                                        text: "Spices"),
+                                                        text: "البهارات والتوابل"),
                                                   ),
                                                 ]),
                                           ),
@@ -618,7 +618,7 @@ class _AddProductScreenState extends State<EditProductScreen> {
                                                                   .all(
                                                               Radius.circular(
                                                                   12)),
-                                                      child: Container(
+                                                      child: SizedBox(
                                                         height: Responsive
                                                                 .isDesktop(
                                                                     context)
@@ -663,7 +663,9 @@ class _AddProductScreenState extends State<EditProductScreen> {
                                                         fit: BoxFit.fill,
                                                       )
                                             : pickimgfileMOb == null
-                                                ? Image.network(webimageURL!)
+                                                ? Hero(
+                                                  tag:widget.id,
+                                                  child: Image.network(webimageURL!))
                                                 : kIsWeb
                                                     ? Image.memory(
                                                         webImagePicked,

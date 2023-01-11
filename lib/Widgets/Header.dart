@@ -8,7 +8,7 @@ class Header extends StatelessWidget {
   Function fct;
   String text;
   bool showtextfeild;
-  Header({required this.fct, required this.text,required this.showtextfeild});
+  Header({required this.fct, required this.text, required this.showtextfeild});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,14 @@ class Header extends StatelessWidget {
       children: [
         if (Responsive.isMobile(context))
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               fct();
             },
           ),
         if (Responsive.isDesktop(context))
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: CustomText(
               color: Colors.green.shade800,
               text: text,
@@ -35,18 +35,20 @@ class Header extends StatelessWidget {
             flex: Responsive.isDesktop(context) ? 1 : 2,
           ),
         Expanded(
-          child:showtextfeild? TextField(
-              decoration: InputDecoration(
-                  hintText: "Search",
-                  fillColor: Colors.green.shade100,
-                  filled: true,
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search, size: 25),
-                    onPressed: () {},
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.black)))):Container(),
+          child: showtextfeild
+              ? TextField(
+                  decoration: InputDecoration(
+                      hintText: "Search",
+                      fillColor: Colors.green.shade100,
+                      filled: true,
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.search, size: 25),
+                        onPressed: () {},
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(color: Colors.black))))
+              : Container(),
         )
       ],
     );

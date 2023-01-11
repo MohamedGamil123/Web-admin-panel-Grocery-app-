@@ -18,31 +18,44 @@ class _AllProductsScreenState extends State<AllProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key:context.read<MenuController>().gridScaffoldKey ,
-      drawer:const Sidemenu(),
-      body:SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-        if(Responsive.isDesktop(context))
-      const  Expanded(child: Sidemenu(),),
-        Expanded(
-          flex: 5,
-          child:SingleChildScrollView(
-            controller: ScrollController(),
-            child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(children: [
-              Header(fct: (){ context.read<MenuController>().controlProductMenu();},
-              text: "All products", showtextfeild: true,
-               ),
-               const SizedBox(
-              height: 50,
+      key: context.read<MenuController>().gridScaffoldKey,
+      drawer: const Sidemenu(),
+      body: SafeArea(
+          child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (Responsive.isDesktop(context))
+            const Expanded(
+              child: Sidemenu(),
             ),
-              Responsive(desktop: Custom_gridview_product(isMain: false),mobile: Custom_gridview_product(isMain: false),)
-            ],),
-          )) ,)
-      ],)) ,
+          Expanded(
+            flex: 5,
+            child: SingleChildScrollView(
+                controller: ScrollController(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Header(
+                        fct: () {
+                          context.read<MenuController>().controlProductMenu();
+                        },
+                        text: "All products",
+                        showtextfeild: true,
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Responsive(
+                        desktop: Custom_gridview_product(isMain: false),
+                        mobile: Custom_gridview_product(isMain: false),
+                      )
+                    ],
+                  ),
+                )),
+          )
+        ],
+      )),
     );
   }
 }

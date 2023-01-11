@@ -12,18 +12,22 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-key: context.read<MenuController>().scaffoldkey,
-drawer:const Sidemenu(),
-body: SafeArea(
-
-  child: Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-  if(Responsive.isDesktop(context))
- const Expanded(child:Sidemenu() ,),
- const Expanded(flex: 5,child: DashBoardScreen(),)
-
-],)),
+      key: context.read<MenuController>().scaffoldkey,
+      drawer: const Sidemenu(),
+      body: SafeArea(
+          child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (Responsive.isDesktop(context))
+            const Expanded(
+              child: Sidemenu(),
+            ),
+          const Expanded(
+            flex: 5,
+            child: DashBoardScreen(),
+          )
+        ],
+      )),
     );
   }
 }

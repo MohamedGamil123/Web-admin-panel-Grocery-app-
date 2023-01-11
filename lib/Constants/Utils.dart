@@ -4,7 +4,7 @@ class Utils {
   BuildContext context;
   Utils(this.context);
 
- Size getsize() {
+  Size getsize() {
     return MediaQuery.of(context).size;
   }
 }

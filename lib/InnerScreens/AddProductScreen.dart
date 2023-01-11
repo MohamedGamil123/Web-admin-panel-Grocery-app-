@@ -37,7 +37,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController sale_price_Controller = TextEditingController();
   TextEditingController pro_desc_controller = TextEditingController();
   TextEditingController amount_controller = TextEditingController();
-  String selecteditem = "Vegetables";
+  String selecteditem = "الفواكة";
   bool isPeice = false;
   String selectedUnit = "Kg";
   File? pickimgfileMOb;
@@ -77,8 +77,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   Future pick_web_mobile_ImageURL() async {
     if (!kIsWeb) {
-      ImagePicker _picker = ImagePicker();
-      XFile? pickeimage = await _picker.pickImage(
+      ImagePicker picker = ImagePicker();
+      XFile? pickeimage = await picker.pickImage(
         source: ImageSource.gallery,
       );
       if (pickeimage != null) {
@@ -90,8 +90,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
         print("No image has been picked");
       }
     } else if (kIsWeb) {
-      ImagePicker _picker = ImagePicker();
-      XFile? pickeimage = await _picker.pickImage(
+      ImagePicker picker = ImagePicker();
+      XFile? pickeimage = await picker.pickImage(
         source: ImageSource.gallery,
       );
       if (pickeimage != null) {
@@ -129,7 +129,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           isLoading = true;
         });
         ref =
-            FirebaseStorage.instance.ref("product images").child(uuid + "jpg");
+            FirebaseStorage.instance.ref("product images").child("${uuid}jpg");
 
         kIsWeb
             ? await ref?.putData(Uint8List.fromList(webImageURL))
@@ -230,7 +230,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       showtextfeild: false,
                     ),
                     Container(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
@@ -420,34 +420,34 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                                 },
                                                 items: [
                                                   DropdownMenuItem(
-                                                    value: "Vegetables",
+                                                    value: "الخضروات",
                                                     child: CustomText(
-                                                        text: "Vegetables"),
+                                                        text: "الخضروات"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Fruits",
+                                                    value: "الفواكة",
                                                     child: CustomText(
-                                                        text: "Fruits"),
+                                                        text: "الفواكة"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Grains",
+                                                    value: "البقوليات",
                                                     child: CustomText(
-                                                        text: "Grains"),
+                                                        text: "البقوليات"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Nuts",
+                                                    value: "المكسرات",
                                                     child: CustomText(
-                                                        text: "Nuts"),
+                                                        text: "المكسرات"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Herbs",
+                                                    value: "الأعشاب",
                                                     child: CustomText(
-                                                        text: "Herbs"),
+                                                        text: "الأعشاب"),
                                                   ),
                                                   DropdownMenuItem(
-                                                    value: "Spices",
+                                                    value: "البهارات والتوابل",
                                                     child: CustomText(
-                                                        text: "Spices"),
+                                                        text: "البهارات والتوابل"),
                                                   ),
                                                 ]),
                                           ),
@@ -556,7 +556,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(12)),
-                                            child: Container(
+                                            child: SizedBox(
                                               height:
                                                   Responsive.isDesktop(context)
                                                       ? setsize.width * 0.25

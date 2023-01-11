@@ -1,9 +1,7 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_admin_panel/Constants/Utils.dart';
 import 'package:grocery_admin_panel/Widgets/Product_Widget.dart';
-import 'package:grocery_admin_panel/Widgets/customtext.dart';
 
 class Custom_gridview_product extends StatelessWidget {
   bool isMain;
@@ -31,7 +29,7 @@ class Custom_gridview_product extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: setsize.width < 770 ? 2 : 4,
-                mainAxisSpacing: setsize.width < 770 ? 0 : 1,
+                mainAxisSpacing: setsize.width < 770 ? 0 : 40,
                 crossAxisSpacing: setsize.width < 770 ? 0 : 10,
                 childAspectRatio: setsize.width < 770 ? 1.7 : 1.3),
             itemCount: isMain && snapshot.data!.docs.length > 4
